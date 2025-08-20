@@ -54,6 +54,37 @@ const MetricCard = ({ title, value, progress, colorClass }) => (
   </div>
 );
 
+// Helper function to calculate weekly targets based on goal and date
+const calculateWeeklyTargets = (currentWeight, goalWeight, targetDate) => {
+  if (!currentWeight || !goalWeight || !targetDate) return null;
+  
+  const today = new Date();
+  const target = new Date(targetDate);
+  const totalDays = Math.ceil((target - today) / (1000 * 60 * 60 * 24));
+  
+  if (totalDays <= 0) return null;
+  
+  const totalWeightChange = goalWeight - currentWeight;
+  const dailyWeightChange = totalWeightChange / totalDays;
+  
+  // Calculate this week's targets
+  const currentWeekStart = getWeekStart(today);
+  const currentWeekEnd = new Date(currentWeekStart);
+  currentWeekEnd.setDate(currentWeekEnd.getDate() + 6);
+  
+  const daysInCurrentWeek = Math.min(7, Math.ceil((currentWeekEnd - today) / (1000 * 60 * 60 * 24)));
+  const weekWeightChange = dailyWeightChange * daysInCurrentWeek;
+  
+  return {
+    startWeight: currentWeight,
+    endWeight: currentWeight + weekWeightChange,
+    dailyChange: dailyWeightChange,
+    totalDays: totalDays,
+    goalWeight: goalWeight,
+    targetDate: targetDate
+  };
+};
+
 // Weekly Progress Component
 const WeeklyProgress = ({ data, weeklyTargets }) => {
   const currentWeek = getWeekNumber(new Date());
@@ -67,8 +98,13 @@ const WeeklyProgress = ({ data, weeklyTargets }) => {
   });
 
   const latestEntry = currentWeekData.length > 0 ? currentWeekData[currentWeekData.length - 1] : null;
-  const weekStartWeight = weeklyTargets.startWeight || 0;
-  const weekEndWeight = weeklyTargets.endWeight || 0;
+  
+  // Use calculated targets if available, otherwise fall back to manual targets
+  const calculatedTargets = weeklyTargets.goalWeight && weeklyTargets.targetDate ? 
+    calculateWeeklyTargets(weeklyTargets.currentWeight || latestEntry?.weight, weeklyTargets.goalWeight, weeklyTargets.targetDate) : null;
+  
+  const weekStartWeight = calculatedTargets?.startWeight || weeklyTargets.startWeight || 0;
+  const weekEndWeight = calculatedTargets?.endWeight || weeklyTargets.endWeight || 0;
   
   // Calculate progress
   const weightProgress = weekEndWeight > weekStartWeight ? 
@@ -103,16 +139,37 @@ const WeeklyProgress = ({ data, weeklyTargets }) => {
         </div>
       </div>
       
-      <div className="grid grid-cols-2 gap-3 mb-4">
-        <div className="text-center p-2 bg-gray-600 rounded-lg">
-          <p className="text-xs text-gray-300">Start Weight</p>
-          <p className="font-bold text-gray-100">{weekStartWeight > 0 ? `${weekStartWeight.toFixed(1)} kg` : 'Not Set'}</p>
+      {calculatedTargets ? (
+        <div className="grid grid-cols-2 gap-3 mb-4">
+          <div className="text-center p-2 bg-gray-600 rounded-lg">
+            <p className="text-xs text-gray-300">Goal Weight</p>
+            <p className="font-bold text-gray-100">{weeklyTargets.goalWeight.toFixed(1)} kg</p>
+          </div>
+          <div className="text-center p-2 bg-gray-600 rounded-lg">
+            <p className="text-xs text-gray-300">Target Date</p>
+            <p className="font-bold text-gray-100">{new Date(weeklyTargets.targetDate).toLocaleDateString()}</p>
+          </div>
+          <div className="text-center p-2 bg-gray-600 rounded-lg">
+            <p className="text-xs text-gray-300">This Week Start</p>
+            <p className="font-bold text-gray-100">{weekStartWeight.toFixed(1)} kg</p>
+          </div>
+          <div className="text-center p-2 bg-gray-600 rounded-lg">
+            <p className="text-xs text-gray-300">This Week End</p>
+            <p className="font-bold text-gray-100">{weekEndWeight.toFixed(1)} kg</p>
+          </div>
         </div>
-        <div className="text-center p-2 bg-gray-600 rounded-lg">
-          <p className="text-xs text-gray-300">Target Weight</p>
-          <p className="font-bold text-gray-100">{weekEndWeight > 0 ? `${weekEndWeight.toFixed(1)} kg` : 'Not Set'}</p>
+      ) : (
+        <div className="grid grid-cols-2 gap-3 mb-4">
+          <div className="text-center p-2 bg-gray-600 rounded-lg">
+            <p className="text-xs text-gray-300">Start Weight</p>
+            <p className="font-bold text-gray-100">{weekStartWeight > 0 ? `${weekStartWeight.toFixed(1)} kg` : 'Not Set'}</p>
+          </div>
+          <div className="text-center p-2 bg-gray-600 rounded-lg">
+            <p className="text-xs text-gray-300">Target Weight</p>
+            <p className="font-bold text-gray-100">{weekEndWeight > 0 ? `${weekEndWeight.toFixed(1)} kg` : 'Not Set'}</p>
+          </div>
         </div>
-      </div>
+      )}
 
       {weekStartWeight > 0 && weekEndWeight > 0 ? (
         <div className="space-y-3">
@@ -120,6 +177,12 @@ const WeeklyProgress = ({ data, weeklyTargets }) => {
             <span>Progress: {Math.max(0, weightProgress).toFixed(1)}%</span>
             <span>Current: {latestEntry?.weight?.toFixed(1) || weekStartWeight.toFixed(1)} kg</span>
           </div>
+          {calculatedTargets && (
+            <div className="text-center p-2 bg-gray-600 rounded-lg">
+              <p className="text-xs text-gray-300">Daily Change: {calculatedTargets.dailyChange.toFixed(2)} kg/day</p>
+              <p className="text-xs text-gray-300">Days Remaining: {calculatedTargets.totalDays}</p>
+            </div>
+          )}
           <ResponsiveContainer width="100%" height={150}>
             <AreaChart data={weeklyData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#374151" />
@@ -167,7 +230,7 @@ const WeeklyProgress = ({ data, weeklyTargets }) => {
       ) : (
         <div className="text-center py-6 text-gray-500">
           <Target size={32} className="mx-auto mb-2 text-gray-300" />
-          <p className="text-sm">Set weekly targets to see your progress!</p>
+          <p className="text-sm">Set goal weight and target date to see your progress!</p>
         </div>
       )}
     </div>
@@ -527,28 +590,69 @@ const TargetModal = ({ currentTargets, onSetTargets, onClose }) => {
               className="w-full px-3 py-2 border border-slate-600 bg-slate-700 text-gray-100 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent text-sm"
             />
           </div>
-          <div>
-            <label className="block text-xs font-medium text-gray-300 mb-1">Weekly Start Weight (kg)</label>
-            <input
-              type="number"
-              step="0.1"
-              value={targets.startWeight || ''}
-              onChange={(e) => setTargets(prev => ({ ...prev, startWeight: parseFloat(e.target.value) || 0 }))}
-              className="w-full px-3 py-2 border border-slate-600 bg-slate-700 text-gray-100 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent text-sm"
-              placeholder="Current weight"
-            />
+          
+          <div className="border-t border-slate-600 pt-3">
+            <h3 className="text-sm font-medium text-gray-200 mb-3">Goal-Based Weekly Targets</h3>
+            <div>
+              <label className="block text-xs font-medium text-gray-300 mb-1">Current Weight (kg)</label>
+              <input
+                type="number"
+                step="0.1"
+                value={targets.currentWeight || ''}
+                onChange={(e) => setTargets(prev => ({ ...prev, currentWeight: parseFloat(e.target.value) || 0 }))}
+                className="w-full px-3 py-2 border border-slate-600 bg-slate-700 text-gray-100 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent text-sm"
+                placeholder="Your current weight"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-300 mb-1">Goal Weight (kg)</label>
+              <input
+                type="number"
+                step="0.1"
+                value={targets.goalWeight || ''}
+                onChange={(e) => setTargets(prev => ({ ...prev, goalWeight: parseFloat(e.target.value) || 0 }))}
+                className="w-full px-3 py-2 border border-slate-600 bg-slate-700 text-gray-100 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent text-sm"
+                placeholder="e.g., 70.0"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-300 mb-1">Target Date</label>
+              <input
+                type="date"
+                value={targets.targetDate || ''}
+                onChange={(e) => setTargets(prev => ({ ...prev, targetDate: e.target.value }))}
+                className="w-full px-3 py-2 border border-slate-600 bg-slate-700 text-gray-100 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent text-sm"
+                min={new Date().toISOString().split('T')[0]}
+              />
+            </div>
           </div>
-          <div>
-            <label className="block text-xs font-medium text-gray-300 mb-1">Weekly End Weight (kg)</label>
-            <input
-              type="number"
-              step="0.1"
-              value={targets.endWeight || ''}
-              onChange={(e) => setTargets(prev => ({ ...prev, endWeight: parseFloat(e.target.value) || 0 }))}
-              className="w-full px-3 py-2 border border-slate-600 bg-slate-700 text-gray-100 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent text-sm"
-              placeholder="Target weight for this week"
-            />
+          
+          <div className="border-t border-slate-600 pt-3">
+            <h3 className="text-sm font-medium text-gray-200 mb-3">Manual Weekly Targets (Optional)</h3>
+            <div>
+              <label className="block text-xs font-medium text-gray-300 mb-1">Weekly Start Weight (kg)</label>
+              <input
+                type="number"
+                step="0.1"
+                value={targets.startWeight || ''}
+                onChange={(e) => setTargets(prev => ({ ...prev, startWeight: parseFloat(e.target.value) || 0 }))}
+                className="w-full px-3 py-2 border border-slate-600 bg-slate-700 text-gray-100 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent text-sm"
+                placeholder="Current weight"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-300 mb-1">Weekly End Weight (kg)</label>
+              <input
+                type="number"
+                step="0.1"
+                value={targets.endWeight || ''}
+                onChange={(e) => setTargets(prev => ({ ...prev, endWeight: parseFloat(e.target.value) || 0 }))}
+                className="w-full px-3 py-2 border border-slate-600 bg-slate-700 text-gray-100 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent text-sm"
+                placeholder="Target weight for this week"
+              />
+            </div>
           </div>
+          
           <div className="flex gap-2">
             <button
               type="submit"
