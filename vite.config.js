@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/tracker/',
+  base: '/tracker-copy/',
   build: {
     outDir: 'dist',
     sourcemap: true
