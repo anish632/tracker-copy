@@ -1,9 +1,9 @@
 {
-  "name": "body-progress-tracker",
+  "name": "tracker",
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://anish632.github.io/body-progress-tracker",
+  "homepage": "https://anish632.github.io/tracker",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

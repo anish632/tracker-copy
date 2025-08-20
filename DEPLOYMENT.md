@@ -3,12 +3,12 @@
 ## Deploy to GitHub Pages
 
 ### Step 1: Update Repository Name
-1. Rename your repository to `body-progress-tracker` (or update the homepage URL in `package.json`)
+1. Rename your repository to `tracker` (or update the homepage URL in `package.json`)
 
 ### Step 2: Update Homepage URL
 Edit `package.json` and replace `[YOUR_USERNAME]` with your actual GitHub username:
 ```json
-"homepage": "https://yourusername.github.io/body-progress-tracker"
+"homepage": "https://yourusername.github.io/tracker"
 ```
 
 ### Step 3: Deploy
@@ -43,7 +43,7 @@ npm run build
 ## Project Structure
 
 ```
-body-progress-tracker/
+tracker/
 ├── App.jsx                 # All React components (single file)
 ├── index.jsx              # React entry point
 ├── index.css              # Global styles with Tailwind

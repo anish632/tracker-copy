@@ -2,7 +2,7 @@
 <img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
 </div>
 
-# Body Progress Tracker
+# Tracker
 
 A modern, simplified fitness tracking application built with React, JavaScript, and Python. Track your weight, body fat percentage, and progress photos with a beautiful, intuitive interface.
 
@@ -71,7 +71,7 @@ A modern, simplified fitness tracking application built with React, JavaScript, 
 
 1. **Update homepage URL** in `package.json`:
    ```json
-   "homepage": "https://yourusername.github.io/body-progress-tracker"
+   "homepage": "https://yourusername.github.io/tracker"
    ```
 
 2. **Deploy**:
@@ -88,7 +88,7 @@ A modern, simplified fitness tracking application built with React, JavaScript, 
 ## Project Structure
 
 ```
-body-progress-tracker/
+tracker/
 ├── App.jsx                 # Main application component (all components included)
 ├── index.jsx              # React entry point
 ├── index.css              # Global styles with Tailwind
