@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-import { Camera, Target, TrendingUp, RefreshCw, Plus, X } from 'lucide-react';
+import { Camera, Target, TrendingUp, RefreshCw, Plus, X, Volume2 } from 'lucide-react';
 
 // Storage service
 const loadData = (key, defaultValue) => {
@@ -23,14 +23,14 @@ const saveData = (key, value) => {
 
 // Metric Card Component
 const MetricCard = ({ title, value, progress, colorClass }) => (
-  <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+  <div className="bg-white/90 backdrop-blur-sm p-3 rounded-lg shadow-sm border border-white/30">
     <div>
-      <h3 className="text-sm font-medium text-gray-600">{title}</h3>
-      <p className="text-2xl font-bold text-gray-900 mt-1">{value}</p>
+      <h3 className="text-xs font-medium text-gray-600">{title}</h3>
+      <p className="text-lg font-bold text-gray-900 mt-1">{value}</p>
     </div>
     {progress !== undefined && (
-      <div className="w-full bg-gray-200 rounded-full h-2.5 mt-3">
-        <div className={`${colorClass} h-2.5 rounded-full transition-all duration-300`} style={{ width: `${Math.min(100, progress)}%` }}></div>
+      <div className="w-full bg-gray-200/50 rounded-full h-2 mt-2">
+        <div className={`${colorClass} h-2 rounded-full transition-all duration-300`} style={{ width: `${Math.min(100, progress)}%` }}></div>
       </div>
     )}
   </div>
@@ -95,36 +95,36 @@ const DataEntryForm = ({ onAddEntry }) => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-      <h2 className="text-2xl font-semibold mb-4 text-gray-800">Add New Entry</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-white/20">
+      <h2 className="text-lg font-semibold mb-3 text-gray-800">Add New Entry</h2>
+      <form onSubmit={handleSubmit} className="space-y-3">
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Weight (kg)</label>
+          <label className="block text-xs font-medium text-gray-700 mb-1">Weight (lbs)</label>
           <input
             type="number"
             step="0.1"
             value={formData.weight}
             onChange={(e) => setFormData(prev => ({ ...prev, weight: e.target.value }))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-            placeholder="70.5"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
+            placeholder="155.5"
             required
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">Body Fat (%)</label>
+          <label className="block text-xs font-medium text-gray-700 mb-1">Body Fat (%)</label>
           <input
             type="number"
             step="0.1"
             value={formData.bodyFat}
             onChange={(e) => setFormData(prev => ({ ...prev, bodyFat: e.target.value }))}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
             placeholder="15.2"
             required
           />
         </div>
         <button
           type="submit"
-          className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors font-medium"
+          className="w-full bg-gradient-to-r from-purple-600 to-purple-700 text-white py-2 px-4 rounded-lg hover:from-purple-700 hover:to-purple-800 transition-all font-medium text-sm"
         >
           Add Entry
         </button>
@@ -137,24 +137,24 @@ const DataEntryForm = ({ onAddEntry }) => {
 const ProgressChart = ({ data }) => {
   if (data.length === 0) {
     return (
-      <div className="text-center py-12 text-gray-500">
-        <TrendingUp size={48} className="mx-auto mb-4 text-gray-300" />
-        <p>No data yet. Add your first entry to see your progress!</p>
+      <div className="text-center py-6 text-gray-500">
+        <TrendingUp size={32} className="mx-auto mb-2 text-gray-300" />
+        <p className="text-sm">No data yet. Add your first entry to see your progress!</p>
       </div>
     );
   }
 
   return (
-    <ResponsiveContainer width="100%" height={300}>
+    <ResponsiveContainer width="100%" height={200}>
       <LineChart data={data}>
         <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
         <XAxis 
           dataKey="date" 
           stroke="#6b7280"
-          fontSize={12}
+          fontSize={10}
           tickFormatter={(date) => new Date(date).toLocaleDateString()}
         />
-        <YAxis stroke="#6b7280" fontSize={12} />
+        <YAxis stroke="#6b7280" fontSize={10} />
         <Tooltip 
           contentStyle={{ 
             backgroundColor: 'white', 
@@ -166,16 +166,16 @@ const ProgressChart = ({ data }) => {
         <Line 
           type="monotone" 
           dataKey="weight" 
-          stroke="#3b82f6" 
+          stroke="#8b5cf6" 
           strokeWidth={2}
-          dot={{ fill: '#3b82f6', strokeWidth: 2, r: 4 }}
+          dot={{ fill: '#8b5cf6', strokeWidth: 2, r: 3 }}
         />
         <Line 
           type="monotone" 
           dataKey="bodyFat" 
           stroke="#10b981" 
           strokeWidth={2}
-          dot={{ fill: '#10b981', strokeWidth: 2, r: 4 }}
+          dot={{ fill: '#10b981', strokeWidth: 2, r: 3 }}
         />
       </LineChart>
     </ResponsiveContainer>
@@ -194,11 +194,11 @@ const PhotoGallery = ({ photos, onAddPhoto }) => {
   };
 
   return (
-    <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-      <h2 className="text-2xl font-semibold mb-4 text-gray-800">Progress Photos</h2>
-      <div className="mb-4">
-        <label className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
-          <Camera size={16} />
+    <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-white/20">
+      <h2 className="text-lg font-semibold mb-3 text-gray-800">Progress Photos</h2>
+      <div className="mb-3">
+        <label className="cursor-pointer inline-flex items-center gap-1 px-3 py-1.5 bg-gradient-to-r from-purple-600 to-purple-700 text-white rounded-lg hover:from-purple-700 hover:to-purple-800 transition-all text-sm">
+          <Camera size={14} />
           Add Photo
           <input
             type="file"
@@ -208,16 +208,16 @@ const PhotoGallery = ({ photos, onAddPhoto }) => {
           />
         </label>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
         {photos.map((photo, index) => (
           <div key={index} className="relative group">
             <img
               src={photo.dataUrl}
               alt={`Progress photo ${index + 1}`}
-              className="w-full h-32 object-cover rounded-lg"
+              className="w-full h-24 object-cover rounded-lg"
             />
             <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-50 transition-all duration-200 rounded-lg flex items-center justify-center">
-              <span className="text-white opacity-0 group-hover:opacity-100 text-sm">
+              <span className="text-white opacity-0 group-hover:opacity-100 text-xs">
                 {new Date(photo.date).toLocaleDateString()}
               </span>
             </div>
@@ -230,18 +230,55 @@ const PhotoGallery = ({ photos, onAddPhoto }) => {
 
 // Motivation Card Component
 const MotivationCard = ({ quote, onNewQuote }) => {
+  const [isSpeaking, setIsSpeaking] = useState(false);
+
+  const speakQuote = () => {
+    if ('speechSynthesis' in window) {
+      if (isSpeaking) {
+        window.speechSynthesis.cancel();
+        setIsSpeaking(false);
+        return;
+      }
+
+      const utterance = new SpeechSynthesisUtterance(quote.text);
+      utterance.rate = 0.9;
+      utterance.pitch = 1;
+      utterance.volume = 0.8;
+      
+      utterance.onstart = () => setIsSpeaking(true);
+      utterance.onend = () => setIsSpeaking(false);
+      utterance.onerror = () => setIsSpeaking(false);
+      
+      window.speechSynthesis.speak(utterance);
+    }
+  };
+
   return (
-    <div className="bg-gradient-to-br from-indigo-500 to-purple-600 p-6 rounded-2xl shadow-lg text-white">
-      <h2 className="text-2xl font-semibold mb-4">Daily Motivation</h2>
-      <blockquote className="text-lg mb-4 italic">"{quote.text}"</blockquote>
-      <p className="text-sm opacity-90 mb-4">— {quote.author}</p>
-      <button
-        onClick={onNewQuote}
-        className="flex items-center gap-2 px-4 py-2 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition-colors"
-      >
-        <RefreshCw size={16} />
-        New Quote
-      </button>
+    <div className="bg-gradient-to-br from-purple-500 via-pink-500 to-rose-500 p-4 rounded-xl shadow-lg text-white">
+      <h2 className="text-lg font-semibold mb-3">Daily Motivation</h2>
+      <blockquote className="text-sm mb-3 italic">"{quote.text}"</blockquote>
+      <p className="text-xs opacity-90 mb-3">— {quote.author}</p>
+      <div className="flex gap-2">
+        <button
+          onClick={onNewQuote}
+          className="flex items-center gap-1 px-3 py-1.5 bg-white bg-opacity-20 rounded-lg hover:bg-opacity-30 transition-colors text-sm"
+        >
+          <RefreshCw size={14} />
+          New Quote
+        </button>
+        <button
+          onClick={speakQuote}
+          className={`flex items-center gap-1 px-3 py-1.5 rounded-lg transition-all text-sm ${
+            isSpeaking 
+              ? 'bg-white bg-opacity-40 text-purple-600' 
+              : 'bg-white bg-opacity-20 hover:bg-opacity-30'
+          }`}
+          title={isSpeaking ? "Stop reading" : "Read quote aloud"}
+        >
+          <Volume2 size={14} />
+          {isSpeaking ? "Stop" : "Read"}
+        </button>
+      </div>
     </div>
   );
 };
@@ -257,45 +294,45 @@ const TargetModal = ({ currentTargets, onSetTargets, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-2xl p-6 w-full max-w-md">
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-semibold text-gray-800">Set Targets</h2>
+      <div className="bg-white rounded-xl p-4 w-full max-w-sm">
+        <div className="flex justify-between items-center mb-3">
+          <h2 className="text-lg font-semibold text-gray-800">Set Targets</h2>
           <button onClick={onClose} className="text-gray-400 hover:text-gray-600">
-            <X size={24} />
+            <X size={20} />
           </button>
         </div>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-3">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Target Weight (kg)</label>
+            <label className="block text-xs font-medium text-gray-700 mb-1">Target Weight (lbs)</label>
             <input
               type="number"
               step="0.1"
               value={targets.weight}
               onChange={(e) => setTargets(prev => ({ ...prev, weight: parseFloat(e.target.value) || 0 }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Target Body Fat (%)</label>
+            <label className="block text-xs font-medium text-gray-700 mb-1">Target Body Fat (%)</label>
             <input
               type="number"
               step="0.1"
               value={targets.bodyFat}
               onChange={(e) => setTargets(prev => ({ ...prev, bodyFat: parseFloat(e.target.value) || 0 }))}
-              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+              className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm"
             />
           </div>
-          <div className="flex gap-3">
+          <div className="flex gap-2">
             <button
               type="submit"
-              className="flex-1 bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition-colors"
+              className="flex-1 bg-gradient-to-r from-purple-600 to-purple-700 text-white py-2 px-3 rounded-lg hover:from-purple-700 hover:to-purple-800 transition-all text-sm"
             >
               Save Targets
             </button>
             <button
               type="button"
               onClick={onClose}
-              className="flex-1 bg-gray-200 text-gray-800 py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors"
+              className="flex-1 bg-gray-200 text-gray-800 py-2 px-3 rounded-lg hover:bg-gray-300 transition-colors text-sm"
             >
               Cancel
             </button>
@@ -360,24 +397,24 @@ const App = () => {
   const latestEntry = useMemo(() => data.length > 0 ? data[data.length - 1] : null, [data]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 text-gray-900 font-sans">
-      <div className="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
-        <header className="mb-8 text-center">
-          <h1 className="text-5xl font-bold text-indigo-600 mb-2">Body Progress Tracker</h1>
-          <p className="text-xl text-gray-600">Track your fitness journey with ease</p>
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50 text-gray-900 font-sans">
+      <div className="max-w-7xl mx-auto p-4">
+        <header className="mb-4 text-center">
+          <h1 className="text-3xl font-bold text-purple-600 mb-1">Body Progress Tracker</h1>
+          <p className="text-sm text-gray-600">Track your fitness journey with ease</p>
         </header>
 
-        <main className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-8">
+        <main className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+          <div className="lg:col-span-2 space-y-4">
             <MetricsDashboard latestEntry={latestEntry} targets={targets} onSetTargets={() => setIsModalOpen(true)} />
-            <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-              <h2 className="text-2xl font-semibold mb-4 text-gray-800">Progress Over Time</h2>
+            <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-white/20">
+              <h2 className="text-lg font-semibold mb-3 text-gray-800">Progress Over Time</h2>
               <ProgressChart data={data} />
             </div>
             <PhotoGallery photos={photos} onAddPhoto={handleAddPhoto} />
           </div>
 
-          <div className="lg:col-span-1 space-y-8">
+          <div className="lg:col-span-1 space-y-4">
             <DataEntryForm onAddEntry={handleAddEntry} />
             <MotivationCard quote={quote} onNewQuote={fetchQuote} />
           </div>
