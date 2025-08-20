@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://anish632.github.io/fitness-tracker",
+  "homepage": "https://anish632.github.io/tracker-copy",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
