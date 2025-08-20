@@ -262,8 +262,8 @@ const MotivationCard = ({ quote, onNewQuote }) => {
 
   return (
     <div className="bg-gray-700 p-4 rounded-xl shadow-lg text-white relative overflow-hidden">
-      {/* Beautiful Inspiring Mountain Background */}
-      <div className="absolute inset-0 opacity-25">
+      {/* Breathtaking Mountain Valley Background */}
+      <div className="absolute inset-0 opacity-30">
         <svg 
           className="w-full h-full rounded-xl"
           viewBox="0 0 400 300" 
@@ -271,33 +271,37 @@ const MotivationCard = ({ quote, onNewQuote }) => {
         >
           <defs>
             <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" style={{stopColor: '#0f172a', stopOpacity: 1}} />
-              <stop offset="30%" style={{stopColor: '#1e3a8a', stopOpacity: 1}} />
-              <stop offset="70%" style={{stopColor: '#3b82f6', stopOpacity: 1}} />
-              <stop offset="100%" style={{stopColor: '#60a5fa', stopOpacity: 1}} />
+              <stop offset="0%" style={{stopColor: '#1e40af', stopOpacity: 1}} />
+              <stop offset="50%" style={{stopColor: '#3b82f6', stopOpacity: 1}} />
+              <stop offset="100%" style={{stopColor: '#93c5fd', stopOpacity: 1}} />
             </linearGradient>
-            <linearGradient id="mountain1" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" style={{stopColor: '#6b7280', stopOpacity: 1}} />
-              <stop offset="50%" style={{stopColor: '#4b5563', stopOpacity: 1}} />
-              <stop offset="100%" style={{stopColor: '#374151', stopOpacity: 1}} />
+            <linearGradient id="distantMountain" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style={{stopColor: '#e5e7eb', stopOpacity: 1}} />
+              <stop offset="50%" style={{stopColor: '#d1d5db', stopOpacity: 1}} />
+              <stop offset="100%" style={{stopColor: '#9ca3af', stopOpacity: 1}} />
             </linearGradient>
-            <linearGradient id="mountain2" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" style={{stopColor: '#9ca3af', stopOpacity: 1}} />
-              <stop offset="50%" style={{stopColor: '#6b7280', stopOpacity: 1}} />
-              <stop offset="100%" style={{stopColor: '#4b5563', stopOpacity: 1}} />
+            <linearGradient id="foregroundMountain" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style={{stopColor: '#374151', stopOpacity: 1}} />
+              <stop offset="50%" style={{stopColor: '#1f2937', stopOpacity: 1}} />
+              <stop offset="100%" style={{stopColor: '#111827', stopOpacity: 1}} />
             </linearGradient>
-            <linearGradient id="mountain3" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" style={{stopColor: '#d1d5db', stopOpacity: 1}} />
-              <stop offset="50%" style={{stopColor: '#9ca3af', stopOpacity: 1}} />
-              <stop offset="100%" style={{stopColor: '#6b7280', stopOpacity: 1}} />
+            <linearGradient id="forest" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style={{stopColor: '#166534', stopOpacity: 1}} />
+              <stop offset="50%" style={{stopColor: '#15803d', stopOpacity: 1}} />
+              <stop offset="100%" style={{stopColor: '#16a34a', stopOpacity: 1}} />
             </linearGradient>
-            <linearGradient id="sun" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style={{stopColor: '#fbbf24', stopOpacity: 1}} />
-              <stop offset="100%" style={{stopColor: '#f59e0b', stopOpacity: 1}} />
+            <linearGradient id="valley" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style={{stopColor: '#22c55e', stopOpacity: 1}} />
+              <stop offset="50%" style={{stopColor: '#16a34a', stopOpacity: 1}} />
+              <stop offset="100%" style={{stopColor: '#15803d', stopOpacity: 1}} />
             </linearGradient>
-            <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" style={{stopColor: '#fbbf24', stopOpacity: 0.8}} />
-              <stop offset="70%" style={{stopColor: '#f59e0b', stopOpacity: 0.4}} />
+            <linearGradient id="river" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style={{stopColor: '#3b82f6', stopOpacity: 0.8}} />
+              <stop offset="100%" style={{stopColor: '#1d4ed8', stopOpacity: 0.9}} />
+            </linearGradient>
+            <radialGradient id="sunGlow" cx="30%" cy="20%" r="60%">
+              <stop offset="0%" style={{stopColor: '#fbbf24', stopOpacity: 0.6}} />
+              <stop offset="70%" style={{stopColor: '#f59e0b', stopOpacity: 0.3}} />
               <stop offset="100%" style={{stopColor: '#f59e0b', stopOpacity: 0}} />
             </radialGradient>
           </defs>
@@ -305,52 +309,49 @@ const MotivationCard = ({ quote, onNewQuote }) => {
           {/* Sky Background */}
           <rect width="400" height="300" fill="url(#sky)"/>
           
-          {/* Sun with Glow */}
-          <circle cx="320" cy="80" r="40" fill="url(#sunGlow)"/>
-          <circle cx="320" cy="80" r="25" fill="url(#sun)"/>
-          <circle cx="320" cy="80" r="35" fill="none" stroke="#fbbf24" strokeWidth="2" opacity="0.6"/>
-          <circle cx="320" cy="80" r="45" fill="none" stroke="#fbbf24" strokeWidth="1" opacity="0.4"/>
+          {/* Sun Glow Effect */}
+          <circle cx="120" cy="60" r="50" fill="url(#sunGlow)"/>
           
-          {/* Distant Mountain Range (Back) */}
-          <polygon points="0,220 30,190 60,210 90,180 120,200 150,170 180,190 210,160 240,180 270,150 300,170 330,140 360,160 400,150 400,300 0,300" fill="url(#mountain3)"/>
+          {/* Clouds */}
+          <ellipse cx="80" cy="40" rx="25" ry="15" fill="white" opacity="0.9"/>
+          <ellipse cx="320" cy="50" rx="20" ry="12" fill="white" opacity="0.8"/>
           
-          {/* Middle Mountain Range */}
-          <polygon points="0,240 40,200 80,220 120,190 160,210 200,180 240,200 280,170 320,190 360,160 400,170 400,300 0,300" fill="url(#mountain2)"/>
+          {/* Distant Snow-Capped Peaks */}
+          <polygon points="0,180 50,120 100,150 150,100 200,130 250,90 300,120 350,80 400,100 400,300 0,300" fill="white" opacity="0.95"/>
+          <polygon points="0,200 30,160 60,180 90,140 120,160 150,120 180,140 210,100 240,120 270,80 300,100 330,60 360,80 400,90 400,300 0,300" fill="url(#distantMountain)"/>
           
-          {/* Main Mountain Range (Front) */}
-          <polygon points="0,260 50,180 100,220 150,160 200,200 250,140 300,180 350,120 400,160 400,300 0,300" fill="url(#mountain1)"/>
+          {/* Left Foreground Mountain */}
+          <polygon points="0,300 0,140 80,80 120,120 160,60 200,100 240,40 280,80 320,20 360,60 400,40 400,300" fill="url(#foregroundMountain)"/>
           
-          {/* Snow-Capped Peaks */}
-          <polygon points="45,190 50,180 55,190" fill="white" opacity="0.95"/>
-          <polygon points="95,230 100,220 105,230" fill="white" opacity="0.95"/>
-          <polygon points="145,170 150,160 155,170" fill="white" opacity="0.95"/>
-          <polygon points="195,210 200,200 205,210" fill="white" opacity="0.95"/>
-          <polygon points="245,150 250,140 255,150" fill="white" opacity="0.95"/>
-          <polygon points="295,190 300,180 305,190" fill="white" opacity="0.95"/>
-          <polygon points="345,130 350,120 355,130" fill="white" opacity="0.95"/>
+          {/* Right Foreground Mountain */}
+          <polygon points="200,300 200,120 240,80 280,120 320,60 360,100 400,40 400,300" fill="url(#foregroundMountain)"/>
           
-          {/* Mountain Details - Ridges */}
-          <path d="M 20,240 L 60,200 L 100,220 L 140,190 L 180,210 L 220,180 L 260,200 L 300,170 L 340,190 L 380,160" 
-                stroke="#374151" strokeWidth="1" fill="none" opacity="0.3"/>
-          <path d="M 10,250 L 50,210 L 90,230 L 130,200 L 170,220 L 210,190 L 250,210 L 290,180 L 330,200 L 370,170" 
-                stroke="#374151" strokeWidth="1" fill="none" opacity="0.2"/>
+          {/* Forest Cover on Mountains */}
+          <polygon points="0,300 0,160 80,100 120,140 160,80 200,120 240,60 280,100 320,40 360,80 400,60 400,300" fill="url(#forest)" opacity="0.7"/>
+          <polygon points="200,300 200,140 240,100 280,140 320,80 360,120 400,60 400,300" fill="url(#forest)" opacity="0.7"/>
           
-          {/* Stars */}
-          <circle cx="40" cy="70" r="1" fill="white" opacity="0.9"/>
-          <circle cx="80" cy="50" r="1" fill="white" opacity="0.7"/>
-          <circle cx="120" cy="80" r="1" fill="white" opacity="0.8"/>
-          <circle cx="160" cy="60" r="1" fill="white" opacity="0.6"/>
-          <circle cx="200" cy="90" r="1" fill="white" opacity="0.7"/>
-          <circle cx="240" cy="40" r="1" fill="white" opacity="0.8"/>
-          <circle cx="280" cy="70" r="1" fill="white" opacity="0.6"/>
-          <circle cx="320" cy="50" r="1" fill="white" opacity="0.7"/>
+          {/* Valley Floor */}
+          <polygon points="0,300 0,200 50,180 100,200 150,180 200,200 250,180 300,200 350,180 400,200 400,300" fill="url(#valley)"/>
+          
+          {/* Winding River */}
+          <path d="M 50,190 Q 100,180 150,190 Q 200,200 250,190 Q 300,180 350,190" stroke="url(#river)" strokeWidth="8" fill="none" opacity="0.8"/>
+          <path d="M 50,190 Q 100,180 150,190 Q 200,200 250,190 Q 300,180 350,190" stroke="url(#river)" strokeWidth="4" fill="none" opacity="0.9"/>
+          
+          {/* River Reflections */}
+          <path d="M 50,190 Q 100,180 150,190 Q 200,200 250,190 Q 300,180 350,190" stroke="#3b82f6" strokeWidth="1" fill="none" opacity="0.6"/>
+          
+          {/* Mountain Details - Ridges and Shadows */}
+          <path d="M 20,200 L 60,160 L 100,180 L 140,140 L 180,160 L 220,120 L 260,140 L 300,100 L 340,120 L 380,80" 
+                stroke="#1f2937" strokeWidth="1" fill="none" opacity="0.4"/>
+          <path d="M 220,200 L 240,160 L 280,180 L 320,140 L 360,160 L 400,120" 
+                stroke="#1f2937" strokeWidth="1" fill="none" opacity="0.4"/>
           
           {/* Motivational Compass */}
-          <g transform="translate(200,270)">
-            <circle cx="0" cy="0" r="15" fill="none" stroke="#fbbf24" strokeWidth="2" opacity="0.8"/>
-            <path d="M-10,0 L10,0 M0,-10 L0,10" stroke="#fbbf24" strokeWidth="1.5" opacity="0.9"/>
-            <path d="M-8,-8 L0,-12 L8,-8" stroke="#fbbf24" strokeWidth="1.5" fill="none" opacity="0.9"/>
-            <circle cx="0" cy="0" r="3" fill="#fbbf24" opacity="0.9"/>
+          <g transform="translate(200,280)">
+            <circle cx="0" cy="0" r="12" fill="none" stroke="#fbbf24" strokeWidth="2" opacity="0.9"/>
+            <path d="M-8,0 L8,0 M0,-8 L0,8" stroke="#fbbf24" strokeWidth="1.5" opacity="0.9"/>
+            <path d="M-6,-6 L0,-10 L6,-6" stroke="#fbbf24" strokeWidth="1.5" fill="none" opacity="0.9"/>
+            <circle cx="0" cy="0" r="2" fill="#fbbf24" opacity="0.9"/>
           </g>
         </svg>
       </div>
