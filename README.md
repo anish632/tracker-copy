@@ -2,158 +2,109 @@
 <img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
 </div>
 
-# Tracker
+# Fitness Tracker
 
-A modern, simplified fitness tracking application built with React, JavaScript, and Python. Track your weight, body fat percentage, and progress photos with a beautiful, intuitive interface.
+A modern, responsive fitness tracking application built with React and Vite. Track your weight, body fat percentage, and progress photos with weekly targets and visual progress charts.
 
 ## Features
 
-- 📊 **Progress Tracking**: Monitor weight and body fat percentage over time
-- 📈 **Visual Charts**: Interactive charts showing your progress trends
-- 📸 **Photo Gallery**: Store and view progress photos
-- 🎯 **Goal Setting**: Set and track targets for weight and body fat
-- 💪 **Daily Motivation**: Inspirational quotes to keep you motivated
-- 📱 **Responsive Design**: Works perfectly on desktop and mobile devices
+- **Weight & Body Fat Tracking**: Monitor your weight and body fat percentage in kilograms
+- **Weekly Targets**: Set weekly weight goals and track progress against expected targets
+- **Progress Visualization**: Interactive charts showing your progress over time
+- **Progress Photos**: Upload and manage progress photos
+- **Motivational Quotes**: Daily motivational quotes with text-to-speech functionality
+- **Responsive Design**: Works seamlessly on desktop and mobile devices
+- **Local Storage**: All data is stored locally in your browser
 
-## Tech Stack
+## Technologies Used
 
-### Frontend
-- **React 18** - Modern React with hooks
-- **JavaScript** - No TypeScript complexity
-- **Tailwind CSS** - Modern, utility-first CSS framework
-- **Recharts** - Beautiful, responsive charts
-- **Lucide React** - Modern icon library
-- **Vite** - Fast build tool and dev server
+- React 18
+- Vite
+- Tailwind CSS
+- Recharts (for data visualization)
+- Lucide React (for icons)
 
-### Backend (Optional)
-- **Python Flask** - Lightweight API server
-- **NumPy** - Data analysis and calculations
-- **Flask-CORS** - Cross-origin resource sharing
+## Getting Started
 
-## Quick Start
+### Prerequisites
 
-### Frontend Only (Recommended for GitHub Pages)
+- Node.js (version 14 or higher)
+- npm or yarn
 
-1. **Install dependencies**:
-   ```bash
-   npm install
-   ```
+### Installation
 
-2. **Start development server**:
-   ```bash
-   npm run dev
-   ```
-
-3. **Build for production**:
-   ```bash
-   npm run build
-   ```
-
-### With Python Backend
-
-1. **Install Python dependencies**:
-   ```bash
-   cd backend
-   pip install -r requirements.txt
-   ```
-
-2. **Start Python server**:
-   ```bash
-   python app.py
-   ```
-
-3. **Start frontend** (in another terminal):
-   ```bash
-   npm run dev
-   ```
-
-## Deployment to GitHub Pages
-
-1. **Update homepage URL** in `package.json`:
-   ```json
-   "homepage": "https://yourusername.github.io/tracker"
-   ```
-
-2. **Deploy**:
-   ```bash
-   npm run deploy
-   ```
-
-3. **Configure GitHub Pages**:
-   - Go to your repository settings
-   - Navigate to "Pages"
-   - Select "gh-pages" branch as source
-   - Save
-
-## Project Structure
-
-```
-tracker/
-├── App.jsx                 # Main application component (all components included)
-├── index.jsx              # React entry point
-├── index.css              # Global styles with Tailwind
-├── index.html             # HTML template
-├── package.json           # Dependencies and scripts
-├── vite.config.js         # Vite configuration
-├── tailwind.config.js     # Tailwind CSS configuration
-├── postcss.config.js      # PostCSS configuration
-├── backend/               # Python backend (optional)
-│   ├── app.py            # Flask application
-│   └── requirements.txt  # Python dependencies
-└── README.md             # This file
+1. Clone the repository:
+```bash
+git clone https://github.com/anish632/fitness-tracker.git
+cd fitness-tracker
 ```
 
-## Key Features Explained
-
-### Single File Architecture
-All React components are consolidated into `App.jsx` for simplicity and easier maintenance.
-
-### Local Storage
-Data is automatically saved to browser's localStorage, so your progress persists between sessions.
-
-### Responsive Design
-Built with Tailwind CSS for a modern, responsive design that works on all devices.
-
-### No External Dependencies
-The app works completely offline and doesn't require any external APIs or services.
-
-## Customization
-
-### Colors
-Update the color scheme in `tailwind.config.js`:
-```javascript
-colors: {
-  primary: {
-    // Your custom colors
-  }
-}
+2. Install dependencies:
+```bash
+npm install
 ```
 
-### Styling
-Modify `index.css` for custom animations and effects.
-
-### Data Structure
-The app uses simple JavaScript objects for data storage:
-```javascript
-{
-  date: "2024-01-15",
-  weight: 70.5,
-  bodyFat: 15.2
-}
+3. Start the development server:
+```bash
+npm run dev
 ```
+
+4. Open your browser and navigate to `http://localhost:5173`
+
+### Building for Production
+
+```bash
+npm run build
+```
+
+### Deployment
+
+The app is configured for GitHub Pages deployment:
+
+```bash
+npm run deploy
+```
+
+## Usage
+
+1. **Add New Entry**: Enter your current weight (in kg) and body fat percentage
+2. **Set Targets**: Click "Set Targets" to configure your long-term and weekly goals
+3. **Track Progress**: View your progress in the charts and weekly progress section
+4. **Upload Photos**: Add progress photos to visualize your transformation
+5. **Stay Motivated**: Get daily motivational quotes and use text-to-speech
+
+## Weekly Targets
+
+The app includes a sophisticated weekly target system:
+- Set your starting weight for the week
+- Define your target weight for the end of the week
+- View a visual chart comparing your actual progress against the expected trajectory
+- Track daily progress throughout the week
+
+## Data Storage
+
+All data is stored locally in your browser's localStorage:
+- Weight and body fat entries
+- Progress photos
+- Target settings
+- App preferences
 
 ## Contributing
 
 1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ## License
 
-MIT License - feel free to use this project for personal or commercial purposes.
+This project is open source and available under the [MIT License](LICENSE).
 
-## Support
+## Live Demo
 
-If you encounter any issues or have questions, please open an issue on GitHub.
+Visit the live application: [Fitness Tracker](https://anish632.github.io/fitness-tracker)
+
+---
+
+Built with ❤️ for fitness enthusiasts
