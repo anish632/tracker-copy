@@ -262,8 +262,8 @@ const MotivationCard = ({ quote, onNewQuote }) => {
 
   return (
     <div className="bg-gray-700 p-4 rounded-xl shadow-lg text-white relative overflow-hidden">
-      {/* Beautiful Inspiring Background Image */}
-      <div className="absolute inset-0 opacity-20">
+      {/* Beautiful Inspiring Mountain Background */}
+      <div className="absolute inset-0 opacity-25">
         <svg 
           className="w-full h-full rounded-xl"
           viewBox="0 0 400 300" 
@@ -271,52 +271,86 @@ const MotivationCard = ({ quote, onNewQuote }) => {
         >
           <defs>
             <linearGradient id="sky" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" style={{stopColor: '#1e3a8a', stopOpacity: 1}} />
-              <stop offset="50%" style={{stopColor: '#3b82f6', stopOpacity: 1}} />
+              <stop offset="0%" style={{stopColor: '#0f172a', stopOpacity: 1}} />
+              <stop offset="30%" style={{stopColor: '#1e3a8a', stopOpacity: 1}} />
+              <stop offset="70%" style={{stopColor: '#3b82f6', stopOpacity: 1}} />
               <stop offset="100%" style={{stopColor: '#60a5fa', stopOpacity: 1}} />
             </linearGradient>
             <linearGradient id="mountain1" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" style={{stopColor: '#374151', stopOpacity: 1}} />
-              <stop offset="100%" style={{stopColor: '#1f2937', stopOpacity: 1}} />
+              <stop offset="0%" style={{stopColor: '#6b7280', stopOpacity: 1}} />
+              <stop offset="50%" style={{stopColor: '#4b5563', stopOpacity: 1}} />
+              <stop offset="100%" style={{stopColor: '#374151', stopOpacity: 1}} />
             </linearGradient>
             <linearGradient id="mountain2" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" style={{stopColor: '#4b5563', stopOpacity: 1}} />
-              <stop offset="100%" style={{stopColor: '#374151', stopOpacity: 1}} />
+              <stop offset="0%" style={{stopColor: '#9ca3af', stopOpacity: 1}} />
+              <stop offset="50%" style={{stopColor: '#6b7280', stopOpacity: 1}} />
+              <stop offset="100%" style={{stopColor: '#4b5563', stopOpacity: 1}} />
+            </linearGradient>
+            <linearGradient id="mountain3" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" style={{stopColor: '#d1d5db', stopOpacity: 1}} />
+              <stop offset="50%" style={{stopColor: '#9ca3af', stopOpacity: 1}} />
+              <stop offset="100%" style={{stopColor: '#6b7280', stopOpacity: 1}} />
             </linearGradient>
             <linearGradient id="sun" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" style={{stopColor: '#fbbf24', stopOpacity: 1}} />
               <stop offset="100%" style={{stopColor: '#f59e0b', stopOpacity: 1}} />
             </linearGradient>
+            <radialGradient id="sunGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" style={{stopColor: '#fbbf24', stopOpacity: 0.8}} />
+              <stop offset="70%" style={{stopColor: '#f59e0b', stopOpacity: 0.4}} />
+              <stop offset="100%" style={{stopColor: '#f59e0b', stopOpacity: 0}} />
+            </radialGradient>
           </defs>
           
-          {/* Sky */}
+          {/* Sky Background */}
           <rect width="400" height="300" fill="url(#sky)"/>
           
-          {/* Sun */}
+          {/* Sun with Glow */}
+          <circle cx="320" cy="80" r="40" fill="url(#sunGlow)"/>
           <circle cx="320" cy="80" r="25" fill="url(#sun)"/>
           <circle cx="320" cy="80" r="35" fill="none" stroke="#fbbf24" strokeWidth="2" opacity="0.6"/>
           <circle cx="320" cy="80" r="45" fill="none" stroke="#fbbf24" strokeWidth="1" opacity="0.4"/>
           
-          {/* Distant Mountains */}
-          <polygon points="0,200 50,150 100,180 150,140 200,160 250,130 300,150 350,120 400,140 400,300 0,300" fill="url(#mountain2)"/>
+          {/* Distant Mountain Range (Back) */}
+          <polygon points="0,220 30,190 60,210 90,180 120,200 150,170 180,190 210,160 240,180 270,150 300,170 330,140 360,160 400,150 400,300 0,300" fill="url(#mountain3)"/>
           
-          {/* Main Mountains */}
-          <polygon points="0,220 80,120 160,180 240,100 320,160 400,140 400,300 0,300" fill="url(#mountain1)"/>
+          {/* Middle Mountain Range */}
+          <polygon points="0,240 40,200 80,220 120,190 160,210 200,180 240,200 280,170 320,190 360,160 400,170 400,300 0,300" fill="url(#mountain2)"/>
           
-          {/* Mountain Peaks with Snow */}
-          <polygon points="70,130 80,120 90,130" fill="white" opacity="0.9"/>
-          <polygon points="230,110 240,100 250,110" fill="white" opacity="0.9"/>
+          {/* Main Mountain Range (Front) */}
+          <polygon points="0,260 50,180 100,220 150,160 200,200 250,140 300,180 350,120 400,160 400,300 0,300" fill="url(#mountain1)"/>
+          
+          {/* Snow-Capped Peaks */}
+          <polygon points="45,190 50,180 55,190" fill="white" opacity="0.95"/>
+          <polygon points="95,230 100,220 105,230" fill="white" opacity="0.95"/>
+          <polygon points="145,170 150,160 155,170" fill="white" opacity="0.95"/>
+          <polygon points="195,210 200,200 205,210" fill="white" opacity="0.95"/>
+          <polygon points="245,150 250,140 255,150" fill="white" opacity="0.95"/>
+          <polygon points="295,190 300,180 305,190" fill="white" opacity="0.95"/>
+          <polygon points="345,130 350,120 355,130" fill="white" opacity="0.95"/>
+          
+          {/* Mountain Details - Ridges */}
+          <path d="M 20,240 L 60,200 L 100,220 L 140,190 L 180,210 L 220,180 L 260,200 L 300,170 L 340,190 L 380,160" 
+                stroke="#374151" strokeWidth="1" fill="none" opacity="0.3"/>
+          <path d="M 10,250 L 50,210 L 90,230 L 130,200 L 170,220 L 210,190 L 250,210 L 290,180 L 330,200 L 370,170" 
+                stroke="#374151" strokeWidth="1" fill="none" opacity="0.2"/>
           
           {/* Stars */}
-          <circle cx="50" cy="60" r="1" fill="white" opacity="0.8"/>
-          <circle cx="120" cy="40" r="1" fill="white" opacity="0.6"/>
-          <circle cx="180" cy="70" r="1" fill="white" opacity="0.7"/>
-          <circle cx="280" cy="50" r="1" fill="white" opacity="0.5"/>
+          <circle cx="40" cy="70" r="1" fill="white" opacity="0.9"/>
+          <circle cx="80" cy="50" r="1" fill="white" opacity="0.7"/>
+          <circle cx="120" cy="80" r="1" fill="white" opacity="0.8"/>
+          <circle cx="160" cy="60" r="1" fill="white" opacity="0.6"/>
+          <circle cx="200" cy="90" r="1" fill="white" opacity="0.7"/>
+          <circle cx="240" cy="40" r="1" fill="white" opacity="0.8"/>
+          <circle cx="280" cy="70" r="1" fill="white" opacity="0.6"/>
+          <circle cx="320" cy="50" r="1" fill="white" opacity="0.7"/>
           
-          {/* Motivational Elements */}
-          <g transform="translate(200,250)">
-            <path d="M-30,0 L-15,-20 L0,0 L15,-20 L30,0" stroke="#fbbf24" strokeWidth="2" fill="none" opacity="0.8"/>
-            <circle cx="0" cy="-10" r="3" fill="#fbbf24" opacity="0.9"/>
+          {/* Motivational Compass */}
+          <g transform="translate(200,270)">
+            <circle cx="0" cy="0" r="15" fill="none" stroke="#fbbf24" strokeWidth="2" opacity="0.8"/>
+            <path d="M-10,0 L10,0 M0,-10 L0,10" stroke="#fbbf24" strokeWidth="1.5" opacity="0.9"/>
+            <path d="M-8,-8 L0,-12 L8,-8" stroke="#fbbf24" strokeWidth="1.5" fill="none" opacity="0.9"/>
+            <circle cx="0" cy="0" r="3" fill="#fbbf24" opacity="0.9"/>
           </g>
         </svg>
       </div>
