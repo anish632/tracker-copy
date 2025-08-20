@@ -48,29 +48,29 @@ const MetricsDashboard = ({ latestEntry, targets, onSetTargets }) => {
   const bodyFatProgress = targets.bodyFat > 0 ? (targets.bodyFat / bodyFat) * 100 : 0;
 
   return (
-    <div className="bg-white p-6 rounded-2xl shadow-lg border border-gray-100">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-2xl font-semibold text-gray-800">Current Stats</h2>
+    <div className="bg-white/80 backdrop-blur-sm p-4 rounded-xl shadow-lg border border-white/20">
+      <div className="flex justify-between items-center mb-3">
+        <h2 className="text-lg font-semibold text-gray-800">Current Stats</h2>
         <button 
           onClick={onSetTargets} 
-          className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-indigo-600 bg-indigo-50 rounded-lg hover:bg-indigo-100 transition-colors"
+          className="flex items-center gap-1 px-3 py-1.5 text-xs font-medium text-purple-600 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors"
         >
-          <Target size={16} />
+          <Target size={14} />
           Set Targets
         </button>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <MetricCard title="Weight (kg)" value={weight.toFixed(1)} progress={weightProgress} colorClass="bg-indigo-500" />
-        <MetricCard title="Body Fat (%)" value={bodyFat.toFixed(1)} progress={100 - bodyFatProgress} colorClass="bg-green-500" />
-        <MetricCard title="Lean Mass (kg)" value={leanMass.toFixed(1)} colorClass="bg-blue-500" />
-        <MetricCard title="Fat Mass (kg)" value={fatMass.toFixed(1)} colorClass="bg-red-500" />
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <MetricCard title="Weight (lbs)" value={weight.toFixed(1)} progress={weightProgress} colorClass="bg-gradient-to-r from-purple-500 to-purple-600" />
+        <MetricCard title="Body Fat (%)" value={bodyFat.toFixed(1)} progress={100 - bodyFatProgress} colorClass="bg-gradient-to-r from-emerald-500 to-emerald-600" />
+        <MetricCard title="Lean Mass (lbs)" value={leanMass.toFixed(1)} colorClass="bg-gradient-to-r from-blue-500 to-blue-600" />
+        <MetricCard title="Fat Mass (lbs)" value={fatMass.toFixed(1)} colorClass="bg-gradient-to-r from-rose-500 to-rose-600" />
       </div>
-      <div className="mt-4 grid grid-cols-2 gap-4">
-        <div className="text-center p-3 bg-gray-50 rounded-lg">
+      <div className="mt-3 grid grid-cols-2 gap-3">
+        <div className="text-center p-2 bg-gray-50/50 rounded-lg">
           <p className="text-xs text-gray-600">Weight Target</p>
-          <p className="font-bold text-gray-900">{targets.weight > 0 ? `${targets.weight.toFixed(1)} kg` : 'Not Set'}</p>
+          <p className="font-bold text-gray-900">{targets.weight > 0 ? `${targets.weight.toFixed(1)} lbs` : 'Not Set'}</p>
         </div>
-        <div className="text-center p-3 bg-gray-50 rounded-lg">
+        <div className="text-center p-2 bg-gray-50/50 rounded-lg">
           <p className="text-xs text-gray-600">Body Fat Target</p>
           <p className="font-bold text-gray-900">{targets.bodyFat > 0 ? `${targets.bodyFat.toFixed(1)} %` : 'Not Set'}</p>
         </div>
