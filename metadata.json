@@ -1,0 +1,5 @@
+{
+  "name": "Body Progress Tracker",
+  "description": "A dashboard to track body weight and body fat percentage, set targets, and visualize progress with photos and motivational quotes. The app aims to help users increase lean muscle, reduce body fat, and boost energy levels.",
+  "requestFramePermissions": []
+}
